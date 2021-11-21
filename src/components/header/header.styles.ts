@@ -27,7 +27,7 @@ export const SearchContainer = styled.div`
     flex-basis: 35%;
   }
   @media ${devices.mobileS} {
-    flex-basis: 30%;
+    flex-basis: 20%;
     font-size: 0.6rem;
   }
 `;
@@ -63,19 +63,42 @@ export const Logo = styled(Link)`
 export const PlayList = styled(Link)`
   color: white;
   border: 1px solid wheat;
-  width: 5rem;
+  width: 5.5rem;
   text-align: center;
   padding: 10px 15px;
   margin: 5px 0;
   margin-right: 25px;
-  box-shadow: inset 1px 1px white;
+  box-shadow: inset 1px 1px wheat;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  .count {
+    display: inline-block;
+    padding: 3px 5px;
+    border: 1px solid white;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 900;
+    background: purple;
+    box-shadow: 1px 1px 10px white;
+    :hover {
+      cursor: pointer;
+    }
+  }
+  .text {
+    :hover {
+      cursor: pointer;
+    }
+  }
 
-  :hover {
+  :hover,
+  * > :hover {
     cursor: pointer;
     transform: translateY(-1px);
     box-shadow: 1px 2px white;
   }
-  :active {
+  :active,
+  * > :active {
     transform: translateY(0px);
     box-shadow: inset 1px 1px white;
   }
@@ -84,8 +107,15 @@ export const PlayList = styled(Link)`
     padding: 6px 8px;
     margin-right: 15px;
     font-size: small;
+    .text {
+      margin-top: 3px;
+    }
   }
   @media ${devices.mobileS} {
     font-size: 0.6rem;
+    width: 4rem;
+    .text {
+      margin-top: 5px;
+    }
   }
 `;

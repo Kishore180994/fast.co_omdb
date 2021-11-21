@@ -71,7 +71,6 @@ export const EmptyPlayList = styled.div`
   position: fixed;
   height: 100vh;
   width: 100vw;
-  border: 1px solid white;
   text-align: center;
   color: white;
   label {

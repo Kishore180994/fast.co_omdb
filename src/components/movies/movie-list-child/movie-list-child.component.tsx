@@ -3,6 +3,7 @@ import { MovieListItem, MovieListContainer, Perimeter } from './movie-list-child
 import MovieItem from '../movie-item/movie-item.component';
 import { briefMovieInfo, detailedMovieInfo } from '../../../utils/interfaces';
 
+// Incoming props
 interface Props {
     movieList: briefMovieInfo[],
     selectedMovie: detailedMovieInfo,
@@ -12,8 +13,9 @@ interface Props {
     addToPlayList: (val: string) => void,
     removeFromPlaylist: (val:string) => void,
     playlist: string[]
-  }
+}
   
+// Displays the list of movies.
 const MovieListChild: React.FC<Props> = ({ movieList, onSelectMovie, playlist, addToPlayList, removeFromPlaylist }) => {
     const myRef = useRef(null);
     const [atEnd, setAtEnd] = useState(false)

@@ -1,7 +1,6 @@
-import React from 'react';
-import { Logo } from '../header/header.styles';
 import { EmptyContainer } from './not-found.styles'
 
+// 404 default page, if wrong path is accessed inside this application.
 const NotFound = () => {
     return (
         <EmptyContainer>

@@ -8,10 +8,11 @@ import {
   BackgroundImageContainer,
   ChildContainer,
   ListContainer,
-  StyledButton,
 } from './movie-list.styles';
 import NoImage from '../../no-image/no-image.component';
+import ThemedButton from '../../button/button.component';
 
+// Incoming props.
 interface Props {
   movieList: briefMovieInfo[],
   selectedMovie: detailedMovieInfo,
@@ -23,8 +24,10 @@ interface Props {
   playlist: string[]
 }
 
-
+// Displays the search results.
 class MovieList extends React.Component<Props, {}> {
+
+  // Handles the scroll behavior of the window.
   componentDidMount() {
     window.addEventListener(
       'scroll',
@@ -57,7 +60,8 @@ class MovieList extends React.Component<Props, {}> {
     } = selectedMovie;
     return (
       movieList.length!== 0?
-      <ListContainer>
+        <ListContainer>
+        {/* Displays the information of the selected movie */}
         <BackgroundImageContainer key={Title}>
           <div className='left-detail'>
             <label className='title' >
@@ -82,12 +86,14 @@ class MovieList extends React.Component<Props, {}> {
               </div>
               </div>
               <div className='button'>
-              {!playlist.includes(imdbID)?<StyledButton width='120' marginTop='20' onClick={()=>addToPlayList(imdbID)}>
-                Add to Playlist
-              </StyledButton> :
-                <StyledButton width='120' marginTop='20' onClick={()=>removeFromPlaylist(imdbID)}>
-                  Remove from Playlist
-                </StyledButton>}
+              {!playlist.includes(imdbID)?<ThemedButton padding='10px 5px' action={() => addToPlayList(imdbID)}>
+                  Add to Playlist
+                </ThemedButton> :
+                  <ThemedButton padding='10px 5px' action={() => removeFromPlaylist(imdbID)}>
+                    Remove from Playlist
+                  </ThemedButton>
+                }
+                
                 </div>
           </div>
           <BackgroundImage>
@@ -124,6 +130,8 @@ class MovieList extends React.Component<Props, {}> {
             </div>
           </div>
           </BackgroundImageContainer>
+
+        {/* Displays the list of movies searched by the user */}
         <ChildContainer>
           <MovieListChild {...this.props}/>
         </ChildContainer>

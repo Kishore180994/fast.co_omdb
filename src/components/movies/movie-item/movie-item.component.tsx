@@ -8,6 +8,7 @@ import {
   PlayListIcon,
 } from './movie-item.styles';
 
+// Incoming props.
 interface Props {
   movie: {
     Poster: string,
@@ -19,7 +20,8 @@ interface Props {
   playlist: string[],
 }
 
-
+// Reusable component.
+// Displays the movie information.
 const MovieItem: React.FC<Props> = ({ movie, addToPlayList, playlist, removeFromPlaylist }) => {
   const addOrRemoveFromPlayList: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation()
@@ -27,7 +29,6 @@ const MovieItem: React.FC<Props> = ({ movie, addToPlayList, playlist, removeFrom
     // We are basically performing toggle operation.
     playlist.includes(id) ? removeFromPlaylist(id) : addToPlayList(id);
   }
-  console.log(movie)
   return (
     <ItemContainer> 
       <div className='focus'>

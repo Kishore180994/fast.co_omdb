@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { devices } from '../../utils/screen-sizes';
 
 export const SearchField = styled.div`
   width: 100%;
@@ -20,6 +21,7 @@ export const InputContainer = styled.div`
   background: white;
   margin: 5px 0;
   input {
+    margin-left: 10px;
     border: 0;
     width: 90%;
     padding: 5px 0;
@@ -30,6 +32,22 @@ export const InputContainer = styled.div`
     color: inherit;
     :focus {
       outline: none;
+    }
+  }
+
+  .search {
+    border-radius: 50%;
+    margin-right: 5px;
+    background: white;
+    .search-icon {
+      border: 4px solid black;
+      border-radius: 50%;
+    }
+  }
+
+  @media ${devices.mobileL} {
+    input {
+      margin-left: 10px;
     }
   }
 `;

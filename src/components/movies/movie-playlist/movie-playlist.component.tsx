@@ -5,6 +5,7 @@ import omdb from '../../../api/omdb';
 import MovieItem from '../movie-item/movie-item.component';
 import ThemedButton from '../../button/button.component'
 
+// Incoming props.
 interface Props{
   addToPlayList: (val: string) => void,
   removeFromPlaylist: (val: string) => void,
@@ -12,10 +13,13 @@ interface Props{
   playlist: string[]
 }
 
+// Playlist type.
 interface State{
   movies: briefMovieInfo[]
 }
 
+// Playlist component
+// Displays the list of movies selected by the user.
 class MoviePlayList extends React.Component<Props, State> {
   state = {
     movies: []
@@ -30,6 +34,8 @@ class MoviePlayList extends React.Component<Props, State> {
     }
   }
 
+  // Performs API request to obtain the movie details using the id's in the
+  // Playlist.
   componentDidMount() {
     this.props.playlist.map(async id => {
       let movieDetail = await omdb.get('/', {
@@ -41,6 +47,7 @@ class MoviePlayList extends React.Component<Props, State> {
     })
   }
 
+  // Confirms the playlist.
   confirmPlayList = () => {
     console.log('Confirm Playlist');
     alert('Playlist Confirmed!!')
@@ -50,8 +57,8 @@ class MoviePlayList extends React.Component<Props, State> {
     const { movies } = this.state;
     return <PlayListContainer>
       <div className='list-view'>
-        {movies ? movies.map(movie => (
-          <span className='movie'>
+        {movies ? movies.map((movie, idx) => (
+          <span className='movie' key={idx}>
             <MovieItem movie={movie} {...this.props} />
           </span>
         )) : <React.Fragment></React.Fragment>}

@@ -8,7 +8,9 @@ import { briefMovieInfo, detailedMovieInfo} from '../../utils/interfaces'
 import { Footer, RouterContainer } from './app.styles';
 import NotFound from '../not-found/not-found.component'
 
-interface Props{}
+interface Props{ }
+
+// App component state interface
 interface MyState {
   playList: string[],
   movieList: briefMovieInfo[],
@@ -21,6 +23,8 @@ interface MyState {
 export default class App extends React.Component<Props, MyState> {
   constructor(props: Props) {
     super(props);
+    
+    // Initializes state values.
     this.state = {
       playList: [],
       movieList: [],
@@ -53,14 +57,17 @@ export default class App extends React.Component<Props, MyState> {
     };
   }
   
+  // Sets scrollingTop values.
   setScrollingTopValue = (val: number) => {
     this.setState({scrollingTopvalue: val})
   }
 
+  // Checks if the page is scrolled.
   setIsScrolling = (val: boolean) => {
     this.setState({ isScrolledBottom: val });
   };
 
+  // Gathes full details of the movie using id.
   getFullDetailsOfTheMovie = async (movie: briefMovieInfo) => {
     // gets the imdbID from the initial movie from the list.
     const imdbId = movie.imdbID;
@@ -82,28 +89,35 @@ export default class App extends React.Component<Props, MyState> {
     }
   };
 
+  // Gets the short detailed movie object and Obtains full details of the
+  // movie.
   setSelectMovie = (movie: briefMovieInfo) => {
     this.getFullDetailsOfTheMovie(movie);
   };
 
+  // Add the movie id to the playlist.
+  // Parameter: val: imdbID
   addToPlaylist = (val: string) => {
     if (!this.state.playList.includes(val)) {
       this.setState({ playList: [...this.state.playList, val] });
     }
   }
 
+  // Remove the item from the playlist.
   removeFromPlaylist = (val: string) => {
     if (this.state.playList.includes(val)) {
       this.setState({ playList: this.state.playList.filter(id => id!==val) });
     }
   }
 
+  // Clears entire playlist.
   clearPlaylist = () => {
     this.setState({playList: []})
   }
 
+  // Gets the list of movies using omdb api.
   onSearchSubmit = async (text: string) => {
-    // Gets the list of movies from the omdb api
+    // API request to omdb api.
     const moviesList = new Promise<any>(async (resolve, reject) => {
       const response = await omdb.get('/', {
         params: {
@@ -122,8 +136,11 @@ export default class App extends React.Component<Props, MyState> {
 
     moviesList.then(async (data) => {
       // Stores the movies list in the state.
+      let incomingData = data as briefMovieInfo[];
+      // Removes duplicates
+      let filteredData = incomingData.filter(movie => movie.imdbID)
       this.setState({
-        movieList: data,
+        movieList: filteredData,
       });
 
       this.getFullDetailsOfTheMovie(data[0]);
@@ -139,11 +156,12 @@ export default class App extends React.Component<Props, MyState> {
             handleSubmit={this.onSearchSubmit}
             isScrolling={isScrolledBottom}
             scrollingTopValue={scrollingTopvalue}
+            numOfItems={playList.length}
           />
           <div>
             <Routes>
               <Route
-                path='/'
+                path='/fast_omdb/'
                 element={
                   <MovieList
                     playlist={playList}
@@ -158,7 +176,7 @@ export default class App extends React.Component<Props, MyState> {
                 }
               />
               <Route
-                path='/playlist'
+                path='/fast_omdb/playlist'
                 element={
                   <MoviePlayList
                     playlist={playList}

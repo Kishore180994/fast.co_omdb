@@ -1,11 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { devices } from '../../../utils/screen-sizes';
 
-interface Props {
-  width: string;
-  marginTop: string;
-}
-
 const moveInLeft = keyframes`
    from {transform: translateX(-100px);}
     to {transform: translateX(0px);}
@@ -42,33 +37,6 @@ export const ChildContainer = styled.div`
   }
 `;
 
-export const StyledButton = styled.button<Props>`
-  width: ${(props) => props.width}px;
-  margin-left: auto;
-  margin-top: ${(props) => props.marginTop}px;
-  margin-bottom: 20px;
-  padding: 10px 5px;
-  background: purple;
-  color: white;
-  box-shadow: inset 1px 0px 10px white;
-  animation: ${buttonMoveIn} 1s ease-in;
-  :hover {
-    cursor: pointer;
-    transform: translateY(-2px);
-    box-shadow: 1px 0px 10px white;
-  }
-
-  :active {
-    cursor: pointer;
-    transform: translateY(0px);
-    box-shadow: inset 1px 0px 10px white;
-  }
-  @media ${devices.mobileL} {
-    font-size: 0.6rem;
-    padding: 8px 8px;
-  }
-`;
-
 export const BackgroundImageContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -86,7 +54,7 @@ export const BackgroundImageContainer = styled.div`
     overflow-y: auto;
     .title {
       display: block;
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       font-weight: 700;
       word-wrap: break-word;
       color: white;
@@ -117,6 +85,10 @@ export const BackgroundImageContainer = styled.div`
           font-weight: 700;
         }
       }
+    }
+    .button {
+      animation: ${buttonMoveIn} 1s ease-in;
+      margin: 10px;
     }
   }
 

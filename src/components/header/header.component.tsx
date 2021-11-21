@@ -2,20 +2,26 @@ import React from 'react';
 import Search from '../searchbar/search.component';
 import { HeaderContainer, Logo, PlayList, SearchContainer } from './header.styles';
 
+// Incoming props.
 interface Props {
   handleSubmit: (text: string) => Promise<void>,
   scrollingTopValue: number,
-  isScrolling: boolean
+  isScrolling: boolean,
+  numOfItems: number,
 }
 
-const Header: React.FC<Props> = ({scrollingTopValue, handleSubmit}) => {
+// Header component
+const Header: React.FC<Props> = ({scrollingTopValue, handleSubmit, numOfItems}) => {
   return (
     <HeaderContainer scrollTopVal={scrollingTopValue }>
-      <Logo to='/'>OMDb</Logo>
+      <Logo to='/fast_omdb/'>OMDb</Logo>
       <SearchContainer>
         <Search onSubmit={handleSubmit} />
       </SearchContainer>
-      <PlayList to='/playlist'>Playlist</PlayList>
+      <PlayList to='/fast_omdb/playlist'>
+        <label className='count'>{numOfItems}</label>
+        <label className='text'>Playlist</label>
+      </PlayList>
     </HeaderContainer>
   );
 };
